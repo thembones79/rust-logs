@@ -12,6 +12,12 @@ fn main() {
         }
     }
 
+    string_test(
+        "red".to_string(),
+        &String::from("red"),
+        String::from("red").as_str(),
+    );
+
     // println!("{:#?}", text);
 
     // match divide(5.0, 3.0) {
@@ -30,6 +36,8 @@ fn main() {
     //     }
     // }
 }
+
+fn string_test(a: String, b: &String, c: &str) {}
 
 fn validate_email(email: String) -> Result<(), Error> {
     if email.contains("@") {

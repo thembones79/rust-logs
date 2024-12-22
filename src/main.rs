@@ -1,22 +1,33 @@
 use std::{fs, io::Error};
 
+fn extract_errors(text: &str) -> Vec<&str> {
+    let split_text = text.split("\n");
+
+    let mut results = vec![];
+
+    for line in split_text {
+        if line.starts_with("ERROR") {
+            results.push(line);
+        }
+    }
+
+    results
+}
+
 fn main() {
     let text = fs::read_to_string("logs.txt");
+    let mut error_logs = vec![];
 
-    match text {
+    let dupa = match text {
         Ok(text_that_was_read) => {
-            println!("Text has {} characters.", text_that_was_read.len())
+            error_logs = extract_errors(&text_that_was_read)
+            // println!("Text has {:#?} characters.", error_logs)
         }
         Err(why_this_failed) => {
             println!("Failed to read file: {}", why_this_failed)
         }
-    }
-
-    string_test(
-        "red".to_string(),
-        &String::from("red"),
-        String::from("red").as_str(),
-    );
+    };
+    println!("Text has {:#?} characters.", dupa)
 
     // println!("{:#?}", text);
 
@@ -36,8 +47,6 @@ fn main() {
     //     }
     // }
 }
-
-fn string_test(a: String, b: &String, c: &str) {}
 
 fn validate_email(email: String) -> Result<(), Error> {
     if email.contains("@") {

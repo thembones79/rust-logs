@@ -1,13 +1,13 @@
 use std::{fs, io::Error};
 
-fn extract_errors(text: &str) -> Vec<&str> {
+fn extract_errors(text: String) -> Vec<String> {
     let split_text = text.split("\n");
 
     let mut results = vec![];
 
     for line in split_text {
         if line.starts_with("ERROR") {
-            results.push(line);
+            results.push(line.to_string());
         }
     }
 
@@ -18,16 +18,16 @@ fn main() {
     let text = fs::read_to_string("logs.txt");
     let mut error_logs = vec![];
 
-    let dupa = match text {
+    match text {
         Ok(text_that_was_read) => {
-            error_logs = extract_errors(&text_that_was_read)
+            error_logs = extract_errors(text_that_was_read)
             // println!("Text has {:#?} characters.", error_logs)
         }
         Err(why_this_failed) => {
             println!("Failed to read file: {}", why_this_failed)
         }
-    };
-    println!("Text has {:#?} characters.", dupa)
+    }
+            println!("Text has {:#?} characters.", error_logs)
 
     // println!("{:#?}", text);
 

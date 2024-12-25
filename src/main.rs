@@ -14,26 +14,26 @@ fn extract_errors(text: &str) -> Vec<String> {
     results
 }
 
-fn main() {
+fn main() -><Result<(), Error>{
     let text = fs::read_to_string("logs.txt");
-    let mut error_logs = vec![];
-
-    match text {
-        Ok(text_that_was_read) => {
-            error_logs = extract_errors(text_that_was_read.as_str());
-            // println!("Text has {:#?} characters.", error_logs)
-            match fs::write("errors.txt", error_logs.join("\n")) {
-                Ok(..) => println!("Wrote errors.txt"),
-                Err(reason_write_failed) => {
-                    println!("Writing of errors.txt failed: {}", reason_write_failed)
-                }
-            }
-        }
-        Err(why_this_failed) => {
-            println!("Failed to read file: {}", why_this_failed)
-        }
-    }
-    println!("Text has {:#?} characters.", error_logs)
+    // let mut error_logs = vec![];
+    //
+    // match text {
+    //     Ok(text_that_was_read) => {
+    //         error_logs = extract_errors(text_that_was_read.as_str());
+    //         // println!("Text has {:#?} characters.", error_logs)
+    //         match fs::write("errors.txt", error_logs.join("\n")) {
+    //             Ok(..) => println!("Wrote errors.txt"),
+    //             Err(reason_write_failed) => {
+    //                 println!("Writing of errors.txt failed: {}", reason_write_failed)
+    //             }
+    //         }
+    //     }
+    //     Err(why_this_failed) => {
+    //         println!("Failed to read file: {}", why_this_failed)
+    //     }
+    // }
+    // println!("Text has {:#?} characters.", error_logs)
 
     // println!("{:#?}", text);
 

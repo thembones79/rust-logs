@@ -14,8 +14,16 @@ fn extract_errors(text: &str) -> Vec<String> {
     results
 }
 
-fn main() -><Result<(), Error>{
-    let text = fs::read_to_string("logs.txt");
+fn main() -> Result<(), Error> {
+    let text = fs::read_to_string("logs.txt")?;
+    let error_logs = extract_errors(text.as_str());
+    fs::write("errors.txt", error_logs.join("\n"))?;
+
+    Ok(())
+
+    // let text = fs::read_to_string("logs.txt").expect("failed to rad log");
+    // let error_logs = extract_errors(text.as_str());
+    // fs::write("errors.txt", error_logs.join("\n")).expect("failed to write");
     // let mut error_logs = vec![];
     //
     // match text {
